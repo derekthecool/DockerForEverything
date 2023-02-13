@@ -8,4 +8,5 @@ WORKDIR /DockerWorld/
 
 RUN gcc -o DockerWorld dockerworld.c
 
+# The guide was a bit messed up here and missed one level of directories
 CMD ["/DockerWorld/DockerWorld"]
