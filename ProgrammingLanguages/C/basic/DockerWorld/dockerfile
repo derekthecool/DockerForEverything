@@ -1,0 +1,11 @@
+# Followed guide here
+# https://www.geeksforgeeks.org/execution-of-c-program-using-docker-environment/
+FROM gcc:latest
+
+COPY . /DockerWorld
+
+WORKDIR /DockerWorld/
+
+RUN gcc -o DockerWorld dockerworld.c
+
+CMD ["/DockerWorld/DockerWorld"]
