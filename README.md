@@ -14,3 +14,4 @@
 ### Bash
 
 - [Simple bash](./ProgrammingLanguages/bash/simple/README.md)
+- [Simple bash opening a netcat TCP server](./ProgrammingLanguages/bash/netcat_tcp_server/README.md)
