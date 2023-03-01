@@ -8,7 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+
+    <!-- Database call package, works with any database -->
     <PackageReference Include="Dapper" Version="2.0.123" />
+
+    <!-- For working with mssql -->
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-preview.1.23110.8" />
   </ItemGroup>
 
 </Project>

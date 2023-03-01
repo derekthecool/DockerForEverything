@@ -6,17 +6,39 @@ services:
     ports:
       - '8080:80'
     depends_on:
-      - db
+      - mysql
+      # - db
 
-  db:
-    image: 'mcr.microsoft.com/mssql/server:2022-latest'
+  # db:
+  #   # image: 'mcr.microsoft.com/mssql/server:2022-latest'
+  #   image: mcr.microsoft.com/azure-sql-edge:1.0.4
+  #   ports:
+  #     - '1433:1433'
+  #   volumes:
+  #     - /var/opt/mssql
+  #     - ./sql:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   command: sh -c 'chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+  #   environment:
+  #     SA_PASSWORD: 'Password1234!'
+  #     ACCEPT_EULA: 'Y'
+  mysql:
+    image: mysql
+    restart: always
     ports:
-      - '1433:1433'
-    volumes:
-      - /var/opt/mssql
-      - ./sql:/usr/src/app
-    working_dir: /usr/src/app
-    command: sh -c 'chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+      # Open this port to access using local mysql client
+      # docker compose applications can just use the internal network name of mysql
+      - 8081:3306
     environment:
-      SA_PASSWORD: 'Password1234!'
-      ACCEPT_EULA: 'Y'
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+  mariadb:
+    image: mariadb
+    restart: always
+    ports:
+      - 8082:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+    volumes:
+      - ./mariadb:/docker-entrypoint-initdb.d

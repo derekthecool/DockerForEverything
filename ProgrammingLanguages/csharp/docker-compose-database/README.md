@@ -36,7 +36,7 @@ use Prime
 select name from sys.tables
 
 # Get all the data from the table
-select *from "dbo"."MyTable"
+select * from "dbo"."MyTable"
 ````
 
 ## Size Check
