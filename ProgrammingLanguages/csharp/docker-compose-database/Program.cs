@@ -1,5 +1,5 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient; // for mssql
+using MySql.Data.MySqlClient; // For MySQL and MariaDB
 using Dapper;
 using System.Data;
 using System;
@@ -16,8 +16,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// app.MapControllers();
-IEnumerable<dynamic> AwesomeFunction()
+IEnumerable<dynamic> QueryMSSQL()
 // string AwesomeFunction()
 {
     // Read from MSSQL database
@@ -30,7 +29,38 @@ IEnumerable<dynamic> AwesomeFunction()
     // return connectionString;
 }
 
-app.MapGet("/", AwesomeFunction);
+IEnumerable<dynamic> QueryMySQL()
+{
+    var connectionString = builder.Configuration.GetConnectionString("MySQL");
+    try
+    {
+        IDbConnection connection = new MySqlConnection(connectionString);
+        var output = connection.Query("select * from testTable", commandType: CommandType.Text);
+        return output;
+    }
+    catch (Exception ex)
+    {
+        return new List<string>() { "Failed", ex.Message, connectionString };
+    }
+}
+IEnumerable<dynamic> QueryMariaDB()
+{
+    var connectionString = builder.Configuration.GetConnectionString("MariaDB");
+    try
+    {
+        IDbConnection connection = new MySqlConnection(connectionString);
+        var output = connection.Query("select * from testTable", commandType: CommandType.Text);
+        return output;
+    }
+    catch (Exception ex)
+    {
+        return new List<string>() { "Failed", ex.Message, connectionString };
+    }
+}
+
+app.MapGet("/mssql", QueryMSSQL);
+app.MapGet("/mysql", QueryMySQL);
+app.MapGet("/mariadb", QueryMariaDB);
 
 app.Run();
 

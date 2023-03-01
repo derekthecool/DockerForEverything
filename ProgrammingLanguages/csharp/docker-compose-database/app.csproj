@@ -15,6 +15,9 @@
     <!-- For working with mssql -->
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-preview.1.23110.8" />
+
+    <!-- For working with MySQL and MariaDB -->
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
   </ItemGroup>
 
 </Project>

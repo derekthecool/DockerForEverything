@@ -11,7 +11,7 @@ I setup a simple  Microsoft SQL Server docker compose.
 docker compose up
 ```
 
-## Testing
+## Testing MSSQL
 
 ```yaml
 ## Connect
@@ -38,6 +38,30 @@ select name from sys.tables
 # Get all the data from the table
 select * from "dbo"."MyTable"
 ````
+
+## Testing MySQL
+
+This one was the easiest.
+
+After running `docker compose up` just run the command `curl http://localhost:8080/mysql`
+
+## Testing MariaDB
+
+This one was up an working, but similar to mssql it is failing to work from the csharp
+application.
+
+The errors it shows:
+
+```txt
+Object cannot be cast from DBNull to other types.
+
+The given key '25972' was not present in the dictionary.
+````
+
+## Using adminer
+
+This is a simple webUI for looking at databases. It is part of the compose.yaml
+file and to access it simply go to http://localhost:8083
 
 ## Size Check
 

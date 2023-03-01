@@ -7,7 +7,7 @@ services:
       - '8080:80'
     depends_on:
       - mysql
-      # - db
+      - mariadb
 
   # db:
   #   # image: 'mcr.microsoft.com/mssql/server:2022-latest'
@@ -39,6 +39,11 @@ services:
     ports:
       - 8082:3306
     environment:
-      MARIADB_ROOT_PASSWORD: password
+      MARIADB_ROOT_PASSWORD: Password1234
     volumes:
       - ./mariadb:/docker-entrypoint-initdb.d
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8083:8080
