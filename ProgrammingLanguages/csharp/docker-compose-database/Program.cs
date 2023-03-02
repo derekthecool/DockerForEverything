@@ -21,7 +21,7 @@ IEnumerable<dynamic> QueryMSSQL()
 {
     // Read from MSSQL database
     var connectionString = builder.Configuration.GetConnectionString("Default");
-    IDbConnection connection = new SqlConnection(connectionString);
+    using IDbConnection connection = new SqlConnection(connectionString);
 
     // var output = connection.Query("select * dbo.MyTable", commandType: CommandType.Text);
     var output = connection.Query("exec sp_databases", commandType: CommandType.Text);
@@ -31,11 +31,12 @@ IEnumerable<dynamic> QueryMSSQL()
 
 IEnumerable<dynamic> QueryMySQL()
 {
-    var connectionString = builder.Configuration.GetConnectionString("MySQL");
+    string connectionString = "";
     try
     {
-        IDbConnection connection = new MySqlConnection(connectionString);
-        var output = connection.Query("select * from testTable", commandType: CommandType.Text);
+        connectionString = builder.Configuration.GetConnectionString("MySQL");
+        using IDbConnection connection = new MySqlConnection(connectionString);
+        var output = connection.Query("get_data", commandType: CommandType.StoredProcedure);
         return output;
     }
     catch (Exception ex)
@@ -45,18 +46,30 @@ IEnumerable<dynamic> QueryMySQL()
 }
 IEnumerable<dynamic> QueryMariaDB()
 {
-    var connectionString = builder.Configuration.GetConnectionString("MariaDB");
+    string connectionString = "";
     try
     {
-        IDbConnection connection = new MySqlConnection(connectionString);
-        var output = connection.Query("use test; select * from testTable", commandType: CommandType.Text);
+        connectionString = builder.Configuration.GetConnectionString("MariaDB");
+        using IDbConnection connection = new MySqlConnection(connectionString);
+        var output = connection.Query("select * from test.testTable", commandType: CommandType.Text);
         // var output = connection.Query("select * from test.testTable;", commandType: CommandType.Text);
         // var output = connection.Query("select * from testTable", commandType: CommandType.Text);
         return output;
     }
     catch (Exception ex)
     {
-        return new List<string>() { "Failed", ex.Message, connectionString };
+        try
+        {
+            connectionString = builder.Configuration.GetConnectionString("MariaDB");
+            using IDbConnection connection = new MySqlConnection(connectionString);
+            var output = connection.Query("show databases", commandType: CommandType.Text);
+            return output;
+        }
+        catch (Exception ex2)
+        {
+            return new List<string>() { "Failed second attempt", ex2.Message, connectionString };
+        }
+        return new List<string>() { "Failed first attempt", ex.Message, connectionString };
     }
 }
 

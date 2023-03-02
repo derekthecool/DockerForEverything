@@ -8,6 +8,13 @@ name TEXT,
 PRIMARY KEY (id)
 ) COMMENT='this is my test table';
 
+delimiter //
+create procedure get_data()
+begin
+    select * from testTable;
+end //
+delimiter ;
+
 INSERT INTO testTable (id, name) VALUES ('1', 'MariaDB test data 1');
 INSERT INTO testTable (id, name) VALUES ('2', 'MariaDB test data 2');
 INSERT INTO testTable (id, name) VALUES ('3', 'MariaDB test data 3');
