@@ -49,7 +49,9 @@ IEnumerable<dynamic> QueryMariaDB()
     try
     {
         IDbConnection connection = new MySqlConnection(connectionString);
-        var output = connection.Query("select * from testTable", commandType: CommandType.Text);
+        var output = connection.Query("use test; select * from testTable", commandType: CommandType.Text);
+        // var output = connection.Query("select * from test.testTable;", commandType: CommandType.Text);
+        // var output = connection.Query("select * from testTable", commandType: CommandType.Text);
         return output;
     }
     catch (Exception ex)
