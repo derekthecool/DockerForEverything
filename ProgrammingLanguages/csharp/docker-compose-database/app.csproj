@@ -7,17 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="*" />
 
     <!-- Database call package, works with any database -->
-    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Dapper" Version="*" />
 
     <!-- For working with mssql -->
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-preview.1.23110.8" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="*" />
 
     <!-- For working with MySQL and MariaDB -->
-    <PackageReference Include="MySql.Data" Version="8.0.31" />
+    <PackageReference Include="MySql.Data" Version="*" />
   </ItemGroup>
 
 </Project>

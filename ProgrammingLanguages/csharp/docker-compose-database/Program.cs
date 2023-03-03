@@ -51,7 +51,7 @@ IEnumerable<dynamic> QueryMariaDB()
     {
         connectionString = builder.Configuration.GetConnectionString("MariaDB");
         using IDbConnection connection = new MySqlConnection(connectionString);
-        var output = connection.Query("select * from test.testTable", commandType: CommandType.Text);
+        var output = connection.Query("get_data", commandType: CommandType.StoredProcedure);
         // var output = connection.Query("select * from test.testTable;", commandType: CommandType.Text);
         // var output = connection.Query("select * from testTable", commandType: CommandType.Text);
         return output;
