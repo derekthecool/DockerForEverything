@@ -17,7 +17,9 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="*" />
 
     <!-- For working with MySQL and MariaDB -->
-    <PackageReference Include="MySql.Data" Version="*" />
+    <PackageReference Include="MySqlConnector" Version="*" />
+    <!-- This package does not work for MariaDB, only MySQL -->
+    <!-- <PackageReference Include="MySql.Data" Version="*" /> -->
   </ItemGroup>
 
 </Project>

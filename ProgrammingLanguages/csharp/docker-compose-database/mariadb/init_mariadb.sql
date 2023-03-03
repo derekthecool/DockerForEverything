@@ -115,3 +115,11 @@ INSERT INTO testTable (id, name) VALUES ('97', 'MariaDB test data 97');
 INSERT INTO testTable (id, name) VALUES ('98', 'MariaDB test data 98');
 INSERT INTO testTable (id, name) VALUES ('99', 'MariaDB test data 99');
 INSERT INTO testTable (id, name) VALUES ('100', 'MariaDB test data 100');
+
+-- Example of how to create users and set permissions
+-- using the 'user'@'%' always had errors for me. Leaving it off works and the
+-- program does the same functionality as % allowing all hosts access
+CREATE USER 'Derek' IDENTIFIED BY 'password';
+grant all on test.* to 'Derek' identified by 'password';
+
+FLUSH PRIVILEGES;
